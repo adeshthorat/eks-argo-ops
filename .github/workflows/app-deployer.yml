@@ -19,7 +19,12 @@ jobs:
                     username: ${{ secrets.DOCKER_USERNAME }}
                     password: ${{ secrets.DOCKER_PASSWORD }}
     # Step 3: Build and push the Docker image
-              - name: Build and push Docker image
+              - name: check the directory path
+                run: |
+                  pwd
+                  ls -la
+            
+              - name: Build and push Docker image                 
                 uses: docker/build-push-action@v3
                 with:
                     context: .

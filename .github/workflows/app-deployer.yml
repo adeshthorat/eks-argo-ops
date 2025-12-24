@@ -22,10 +22,11 @@ jobs:
               - name: Build and push Docker image
                 uses: docker/build-push-action@v3
                 with:
-                    context: src/Dockerfile
+                    context: .
+                    file: ./src/Dockerfile
                     push: true
                     tags: adesh0303/eks-app:${{ github.sha }}
-                    
+
     update-deployment:
             needs: image_build
             runs-on: ubuntu-latest

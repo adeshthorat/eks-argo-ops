@@ -11,6 +11,6 @@ HEALTHCHECK \
     --retries=3 \
     CMD ["curl", "-s","http://localhost/"] || exit 1
 
-COPY . /usr/share/nginx/html/
+COPY src/ /usr/share/nginx/html/
 
 CMD [ "nginx","-g","daemon off;"]

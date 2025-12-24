@@ -40,8 +40,7 @@ jobs:
               - name: Build and push Docker image                 
                 uses: docker/build-push-action@v3
                 with:
-                    context: .
-                    file: ./src/Dockerfile
+                    context: src/
                     push: true
                     tags: adesh0303/eks-app:${{ github.sha }}
 

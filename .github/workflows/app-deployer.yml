@@ -27,7 +27,7 @@ jobs:
                   docker info
                   docker --version
                 continue-on-error: true
-                
+
     # Step 3: Build and push the Docker image
               - name: check the directory path
                 run: |
@@ -51,7 +51,26 @@ jobs:
                 uses: actions/checkout@v2
               - name: Update deployment file with new image
                 run: |
-                    sed -i 's|image: adesh0303/eks-app:.*|image: adesh0303/eks-app:${{ github.sha }}|' manifest/deployment.yaml                          
-        
+                    sed -i 's|image: adesh0303/eks-app:.*|image: adesh0303/eks-app:${{ github.sha }}|' manifest/deployment.yaml
+                    if [$? -eq 0];then
+                      echo "Deployment file updated successfully"
+                    else
+                      echo "Failed to update deployment file"
+                    fi
+                continue-on-error: false                     
+    #update the deployment file with the new image tag
+              - name: Commit and push changes
+                run: |
+                    git config --global user.name 'github-actions'
+                    git config --global user.email '
+                    git add manifest/deployment.yaml
+                    git commit -m 'Update deployment image to ${{ github.sha }}'
+                    git push origin main  
+                    if [$? -eq 0];then
+                      cat manifest/deployment.yaml | grep 'image:'
+                    else
+                      echo "No Changes to commit"
+                    fi
+
 
 

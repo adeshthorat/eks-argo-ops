@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pixel-app
+  labels:
+    app: static
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: static
+  template:
+    metadata:
+      labels:
+        app: static
+    spec:
+      containers:
+        - name: nginx
+          image: adesh0303/eks-app:v1.0.0
+          ports:
+            - containerPort: 80

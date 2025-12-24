@@ -1,8 +1,11 @@
-name: Build docker image and update the deployment file
+name: build-push
 
 on:
     push:
         branches: [main]
+
+permissions:
+  contents: write
 
 jobs:
     image_build: 
@@ -45,7 +48,6 @@ jobs:
     update-deployment:
             needs: image_build
             runs-on: ubuntu-latest
-
             steps:
               - name: Checkout repository
                 uses: actions/checkout@v2

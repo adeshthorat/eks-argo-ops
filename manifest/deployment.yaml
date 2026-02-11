@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: adesh0303/eks-app:2c32c56847d493f926a210e5c3cac1a6cf0360e3
+          image: adesh0303/eks-app:0100f75a5843d30f141a8437b9624b821859e993
           ports:
             - containerPort: 80
